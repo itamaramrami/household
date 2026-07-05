@@ -10,12 +10,12 @@ const Dashboard: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'transactions' | 'savings' | 'fixed' | 'graphs'>('transactions');
 // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
-    const interval = setInterval(() => {
-      updateFinancialData();
-    }, 30000);  // כל 30 שניות
+  const interval = setInterval(() => {
+    updateFinancialData();
+  }, 30000);
 
-    return () => clearInterval(interval);
-  }, []);
+  return () => clearInterval(interval);
+}, [updateFinancialData]);
 
   
   const renderContent = () => {
