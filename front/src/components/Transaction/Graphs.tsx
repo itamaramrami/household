@@ -3,13 +3,6 @@ import { fetchTransactions } from '../../api/transactionsAPI';
 import { fetchFixedPayments } from '../../api/Fixed';
 import { fetchSavings } from '../../api/Saving';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, TooltipProps } from 'recharts';
-import {
-  BarChart,
-  Bar,
-  LineChart,
-  Line,
-  XAxis,
-} from 'recharts';
 import { Transaction } from '../../interfaces/TransactionModel'; // Import Transaction interface
 
 // Interfaces
