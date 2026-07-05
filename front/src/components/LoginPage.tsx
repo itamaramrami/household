@@ -6,27 +6,6 @@ import { LoginFormData } from '../modules/LoginDate';
 import { CodeResponse } from '@react-oauth/google';
 
 
-
-
-interface GoogleTokenResponse {
-  access_token: string;
-  code?: string;
-  scope: string;
-}
-
-interface LoginResponse {
-  success: boolean;
-  message: string;
-  token: string;
-  user: {
-    id: string;
-    role: string;
-    name: string;
-    email: string;
-    friends: string[];
-  };
-}
-
 const LoginPage = () => {
 
   const [Data, setData] = useState<LoginFormData>({
@@ -74,64 +53,6 @@ const LoginPage = () => {
     }
   };
 
-  const googleLogin = useGoogleLogin({
-    onSuccess: async (codeResponse: CodeResponse) => {
-      try {
-        setLoading(true);
-        setError(null);
-
-        const response = await fetch('http://localhost:5001/api/House/auth/google', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ 
-            code: codeResponse.code,
-            redirect_uri: 'http://localhost:3000'
-          }),
-        });
-
-        const data = await response.json();
-        console.log("Server Response:", data);
-
-        if (!response.ok) {
-          throw new Error(data.message || 'שגיאה בהתחברות עם Google');
-        }
-
-        if (data.success && data.token) {
-          // שמירת הטוקן בפורמט הנכון
-          localStorage.setItem('token', data.token);
-          localStorage.setItem('userData', JSON.stringify(data.user));
-
-          // בדיקה שהטוקן נשמר
-          console.log("Saved token:", localStorage.getItem('token'));
-
-          if (data.user.role === 'admin') {
-            navigate('/admin');
-          } else {
-            navigate('/home');
-          }
-          
-
-        } else {
-          throw new Error(data.message || 'חסרים נתונים בתגובה מהשרת');
-        }
-        window.location.reload();
-
-      } catch (error) {
-        console.error('Google login error:', error);
-        setError(error instanceof Error ? error.message : 'שגיאה בהתחברות');
-      } finally {
-        setLoading(false);
-      }
-    },
-    onError: (error) => {
-      console.error('Google login error:', error);
-      setError('שגיאה בהתחברות עם Google');
-    },
-    flow: 'auth-code',
-    scope: 'email profile https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/calendar.events',
-});
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;

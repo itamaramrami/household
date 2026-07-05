@@ -19,9 +19,7 @@ const ShoppingList: React.FC = () => {
   const [quantity, setQuantity] = useState<number>(1);
   const [unit, setUnit] = useState<string>("יחידות");
   const [category, setCategory] = useState<string>("כללי");
-  const [loading, setLoading] = useState(false);
   const [editingItemId, setEditingItemId] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
   const [alert, setAlert] = useState<AlertType | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>("הכל");
 
@@ -54,7 +52,6 @@ const ShoppingList: React.FC = () => {
   
     const loadItems = useCallback(async () => {
       try {
-        setLoading(true);
         const fetchedItems = await fetchShoppingItems();
         const updatedItems = fetchedItems.map((item: ShoppingItem) => ({
           _id: item._id,
@@ -69,13 +66,12 @@ const ShoppingList: React.FC = () => {
       } catch (err) {
         showAlert("שגיאה בטעינת הפריטים", "error");
       } finally {
-        setLoading(false);
       }
     }, []);
   
     useEffect(() => {
       loadItems();
-    }, []);
+    }, [loadItems]);
   
     const handleAddItem = async () => {
       if (!name.trim()) {
@@ -83,7 +79,6 @@ const ShoppingList: React.FC = () => {
         return;
       }
       try {
-        setLoading(true);
         const newItem = await addShoppingItem(
           name.trim(),
           quantity,
@@ -99,7 +94,6 @@ const ShoppingList: React.FC = () => {
       } catch (err) {
         showAlert("שגיאה בהוספת הפריט", "error");
       } finally {
-        setLoading(false);
       }
     };
   
@@ -109,7 +103,6 @@ const ShoppingList: React.FC = () => {
         return;
       }
       try {
-        setLoading(true);
         const item = items.find(i => i._id === editingItemId);
         if (!item) {
           throw new Error("הפריט לא נמצא");
@@ -136,7 +129,6 @@ const ShoppingList: React.FC = () => {
       } catch (err) {
         showAlert("שגיאה בעדכון הפריט", "error");
       } finally {
-        setLoading(false);
       }
     };
     const toggleItemPurchased = async (itemId: string) => {
