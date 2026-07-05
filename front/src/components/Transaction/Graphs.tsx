@@ -9,10 +9,6 @@ import {
   LineChart,
   Line,
   XAxis,
-  YAxis,
-  CartesianGrid,
-  Legend,
-  ComposedChart
 } from 'recharts';
 import { Transaction } from '../../interfaces/TransactionModel'; // Import Transaction interface
 
