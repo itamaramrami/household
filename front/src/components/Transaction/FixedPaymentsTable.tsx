@@ -41,6 +41,7 @@ const FixedPaymentsTable: React.FC = () => {
   }, [loadFixedPayments]);
 
   // interval
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const interval = setInterval(() => {
       loadFixedPayments();

@@ -33,7 +33,6 @@ const TaskList: React.FC = () => {
   // Sorting and filtering states
   const [sortBy, setSortBy] = useState<'date' | 'priority' | 'assignee' | 'none'>('none');
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
-  const [filterStatus, setFilterStatus] = useState<string>('all');
 
   const formatDate = (date: Date | string | undefined): string => {
     if (!date) return '';
