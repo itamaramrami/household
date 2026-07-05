@@ -245,7 +245,7 @@ const TaskList: React.FC = () => {
 
   useEffect(() => {
     loadTasks();
-  }, []);
+  }, [loadTasks]);
 
   // The entire render method remains exactly the same as in the original code
   return (
