@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState , useCallback } from "react";
 import { Task, TaskResponse, fetchAllTasks, addTask, updateTask, deleteTask } from "../api/taskApi";
 
 interface Friend {
@@ -149,7 +149,7 @@ const TaskList: React.FC = () => {
     return sortTasks(filtered);
   };
 
-  const loadTasks = async () => {
+  const loadTasks = useCallback (async () => {
     try {
       setLoading(true);
       setError(null);
@@ -163,7 +163,7 @@ const TaskList: React.FC = () => {
     } finally {
       setLoading(false);
     }
-  };
+  },[]);
 
   const handleAddTask = async () => {
     if (!title.trim()) {
