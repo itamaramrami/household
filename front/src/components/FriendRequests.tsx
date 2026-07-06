@@ -36,7 +36,6 @@ const Home: React.FC = () => {
   const [alert, setAlert] = useState<{message: string; type: 'success' | 'error'} | null>(null);
   const [userName, setUserName] = useState<string | null>(null);
   const [friends, setFriends] = useState<string[]>([]);
-  const [showFriendsModal, setShowFriendsModal] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
