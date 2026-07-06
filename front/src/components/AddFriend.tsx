@@ -37,8 +37,8 @@ const AddFriend: React.FC<AddFriendProps> = ({ onSuccess }) => {
         method: 'POST',
         body: JSON.stringify({ friendEmail: email })
       });
-  
-      setMessage({ 
+      if (response.ok){
+        setMessage({ 
         text: 'בקשת החברות נשלחה בהצלחה', 
         type: 'success' 
       });
@@ -47,6 +47,9 @@ const AddFriend: React.FC<AddFriendProps> = ({ onSuccess }) => {
       if (onSuccess) {
         setTimeout(onSuccess, 1500);
       }
+      }
+  
+      
     } catch (error) {
       handleAuthError(error);
       setMessage({

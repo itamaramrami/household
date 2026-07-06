@@ -30,7 +30,7 @@ const Home: React.FC = () => {
   const { itemCount } = useShopping();
   const { financialData } = useFinancialContext();
   const { getUpcomingWeekEventsCount } = useEvents();
-  const { tasksCount, loadTasks } = useTasks();
+  const { tasksCount } = useTasks();
   const [userName, setUserName] = useState<string | null>(null);
   const [userId, setUserId] = useState<string | null>(null);
   const [showAddFriendModal, setShowAddFriendModal] = useState(false);

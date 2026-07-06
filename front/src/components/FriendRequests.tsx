@@ -41,6 +41,7 @@ const Home: React.FC = () => {
     const userData = localStorage.getItem('userData');
     if (userData) {
       const user = JSON.parse(userData);
+      console.log(user)
     }
   }, []);
 
