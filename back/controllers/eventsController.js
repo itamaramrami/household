@@ -177,6 +177,7 @@ export const addToGoogleCalendar = async (req, res) => {
       }
 
       const oauth2Client = new OAuth2Client(
+          console.log("GOOGLE CLIENT ID:", process.env.GOOGLE_CLIENT_ID),
           process.env.GOOGLE_CLIENT_ID,
           process.env.GOOGLE_CLIENT_SECRET,
           'http://localhost:3000'
