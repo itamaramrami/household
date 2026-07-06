@@ -1,12 +1,12 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import EventForm from './EventForm';
 import { Event } from '../interfaces/Event';
 import { fetchEvents, addEvent, updateEvent, deleteEvent } from '../api/eventsApi';
 
 
 
-const EventTable = () => {
+const EventTable =  () => {
 
   const [events, setEvents] = useState<Event[]>([]);
   const [selectedEvent, setSelectedEvent] = useState<Event | undefined>(undefined);
@@ -14,24 +14,25 @@ const EventTable = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [alert, setAlert] = useState<{message: string; type: 'success' | 'error'} | null>(null);
  
-  useEffect(() => {
-    loadEvents();
-  }, []);
 
   const showAlert = (message: string, type: 'success' | 'error') => {
     setAlert({ message, type });
     setTimeout(() => setAlert(null), 3000);
   };
 
-  const loadEvents = async () => {
-    try {
-      const data = await fetchEvents();
-      setEvents(data);
-    } catch (error) {
-      console.error('Error fetching events:', error);
-      showAlert('שגיאה בטעינת האירועים', 'error');
-    }
-  };
+  const loadEvents = useCallback(async () => {
+  try {
+    const data = await fetchEvents();
+    setEvents(data);
+  } catch (error) {
+    console.error('Error fetching events:', error);
+    showAlert('שגיאה בטעינת האירועים', 'error');
+  }
+}, []);
+useEffect(() => {
+  loadEvents();
+}, [loadEvents]);
+
 
   const handleAddEvent = async (event: Event) => {
     try {

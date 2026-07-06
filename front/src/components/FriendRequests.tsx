@@ -35,14 +35,12 @@ const Home: React.FC = () => {
   const [isRequestsOpen, setIsRequestsOpen] = useState(false);
   const [alert, setAlert] = useState<{message: string; type: 'success' | 'error'} | null>(null);
   const [userName, setUserName] = useState<string | null>(null);
-  const [friends, setFriends] = useState<string[]>([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     const userData = localStorage.getItem('userData');
     if (userData) {
       const user = JSON.parse(userData);
-      setFriends(user.friends || []);
     }
   }, []);
 
