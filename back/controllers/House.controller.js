@@ -223,7 +223,7 @@ export const googleAuth = async (req, res) => {
 
         // יצירת אובייקט OAuth2Client עם URI קבוע
         const oauth2Client = new OAuth2Client(
-            console.log("GOOGLE CLIENT ID:", process.env.GOOGLE_CLIENT_ID),
+            console.log("CLIENT ID =", process.env.REACT_APP_GOOGLE_CLIENT_ID);
             process.env.GOOGLE_CLIENT_ID,
             process.env.GOOGLE_CLIENT_SECRET,
             'http://localhost:3000'  // URI קבוע
