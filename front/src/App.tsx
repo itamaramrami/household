@@ -1,5 +1,3 @@
-import React from 'react';
-import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import ErrorBoundary from './components/ErrorBoundary';
@@ -37,7 +35,7 @@ function App() {
     <FixedPaymentsProvider>
     <EventsProvider>
    <ErrorBoundary>
-     <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID!}>
+     <GoogleOAuthProvider clientId={process.env.GOOGLE_CLIENT_ID!}>
        <Router>
          <Routes>
            <Route path="/" element={
